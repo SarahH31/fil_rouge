@@ -3,10 +3,13 @@
 #include "grille.c"
 
 
+
 int main(){
 
 	grille_m morpion;
 	new_grille_m(&morpion);
+	
+	estJouable("9 01");
 
 
 	actualise_dot(&morpion, "graphviz_output.dot");

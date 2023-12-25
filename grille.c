@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "grille.h"
 
 
@@ -18,6 +20,37 @@ void new_position(position *pos) {
 
     pos->joueurActuel = 'o';
 }
+
+
+int estJouable(const char* fen){
+	int size = strlen(fen);
+	for (int i = 0; i < size; i++) {
+		// TODO: vérifier le format de la fen avec laquelle on travaille
+        if (fen[i] == ' '){
+        
+        	int numGrille = atoi(&fen[i+1]);
+        	int numCase = atoi(&fen[i+2]);
+       
+        	if (numGrille >= 0 && numGrille <= 9 && numCase >= 0 && numCase <= 9) {
+    			grille_m grilleVerif = fen_to_grille(fen);
+    			
+    				if (grilleVerif.cases[numCase].joueur == '.'){
+    					printf("Le coup est jouable");
+    					return 0;
+    				}
+    				printf("Le coup n'est pas jouable");
+    				return 1;
+    				// TODO: dans la fonction, permettre au joueur de rentrer un autre coup
+    		}
+   			fprintf(stderr, "Message d'erreur : le coup demandé n'est pas au bon format\n");
+   			// TODO: dans la fonction, permettre au joueur de rentrer un autre coup
+     
+       }
+        
+    fprintf(stderr, "Message d'erreur :format incorrect\n");
+    } 
+}
+
 
 
 void actualise_dot(const grille_m *morpion, const char *filename) {
