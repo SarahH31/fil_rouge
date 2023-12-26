@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+
+void grid_to_fen(char grid[][8], int rows, int cols, char *fen) {
+    int count = 0;
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            char cell = grid[i][j];
+
+            if (cell == '.') {
+                count++;
+            } else {
+                if (count > 0) {
+                    sprintf(fen, "%d", count);
+                    fen += strlen(fen);
+                    count = 0;
+                }
+                *fen = cell;
+                fen++;
+            }
+        }
+
+        if (count > 0) {
+            sprintf(fen, "%d", count);
+            fen += strlen(fen);
+            count = 0;
+        }
+      
+        if (i < rows - 1) {
+            *fen = '/';
+            fen++;
+        }
+    }
+
+    *fen = '\0';
+}
+
+int main() {
+    char grid[9][9] = {
+        {'x', 'o', '.', '.', 'x', 'x', 'o', 'o', '.'},
+    };
+
+    char fen[9 * 9];
+    grid_to_fen(grid, 9, 9, fen);
+    printf("%s\n", fen);
+
+    return 0;
+}
