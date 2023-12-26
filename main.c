@@ -6,10 +6,9 @@
 
 int main(){
 
-	grille_m morpion;
-	new_grille_m(&morpion);
+	grille_m morpion = new_grille_m();
 	
-	estJouable("9 01");
+	// estJouable("9 01");
 
 
 	actualise_dot(&morpion, "graphviz_output.dot");

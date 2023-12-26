@@ -5,20 +5,24 @@
 #include "grille.h"
 
 
-void new_grille_m(grille_m *grille) {
-
+grille_m new_grille_m() {
+	grille_m grille;
+	
     for (int i = 0; i < 9; i++) {
-        grille->cases[i].joueur = '.';
+        grille.cases[i].joueur = '.';
     }
+    return grille;
 }
 
 
-void new_position(position *pos) {
+position new_position() {
+	position *pos;
     for (int j = 0; j < 9; j++) {
     	new_grille_m(&(pos->grilles[j]));
     }
 
     pos->joueurActuel = 'o';
+    return *pos;
 }
 
 
@@ -32,7 +36,7 @@ int estJouable(const char* fen){
         	int numCase = atoi(&fen[i+2]);
        
         	if (numGrille >= 0 && numGrille <= 9 && numCase >= 0 && numCase <= 9) {
-    			grille_m grilleVerif = fen_to_grille(fen);
+    			grille_m grilleVerif = fen_to_grid(fen);
     			
     				if (grilleVerif.cases[numCase].joueur == '.'){
     					printf("Le coup est jouable");
@@ -44,10 +48,11 @@ int estJouable(const char* fen){
     		}
    			fprintf(stderr, "Message d'erreur : le coup demandé n'est pas au bon format\n");
    			// TODO: dans la fonction, permettre au joueur de rentrer un autre coup
-     
+     		return 1;
        }
         
     fprintf(stderr, "Message d'erreur :format incorrect\n");
+    return 1;
     } 
 }
 
