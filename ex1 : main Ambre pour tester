@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include "struct_sarah.h"
+
+int main() {
+    	grille_m pos = {{'x', 'o', 'o', 'o', 'x', 'x', 'x', 'o', 'o'}};
+    	int i = 0;
+    	char a = partie_finie(pos);
+    	int b = debut_min_max(pos, 'x');
+
+    	if (a == 'o' || a == 'x'){
+    		printf("La partie est finie. Gagnant : %c\n", a);
+    		printf("min_max %d\n", b);
+    		return 0;
+    	}
+
+    	if (a == 'n'){
+        	printf("%s\n", "La partie n'est pas finie");
+        	printf("min_max %d\n", b);
+        	return 0;
+        }
+
+    	if (a == 'd'){
+        	printf("%s\n", "Match nul");
+        	printf("min_max %d\n", b);
+        	return 0;
+        }
+
+        printf("%s\n", "Quelque chose d'inattendu s'est produit.");
+    	return 0;
+}
