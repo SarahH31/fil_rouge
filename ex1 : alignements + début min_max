@@ -1,0 +1,82 @@
+include <stdio.h>
+#include "struct_sarah.h"
+
+int i;
+int j;
+int k;
+
+//fonction de détection des alignements pour savoir si partie est finie ou pas
+
+char partie_finie(grille_m grille){
+
+        //vérification des colonnes
+        for (i=0; i<3; i++){
+		int j = i + 3;
+		int k = i + 6;
+		if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != ' ')){
+			return grille.cases[i].joueur;
+		}
+	}
+
+        //vérification des lignes
+	for (i=0; i<7; i+=3){
+		int j = i + 1;
+        int k = i + 2;
+        if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != ' ')){
+	        return grille.cases[i].joueur;
+		}
+	}
+
+	//vérification de la diagonale 1
+	i = 2;
+	j = 4;
+	k = 6;
+	if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != ' ')){
+		return grille.cases[i].joueur;
+	}
+
+	//vérification de la diagonale 2
+	i = 0;
+	j = 4;
+	k = 8;
+	if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != ' ')){
+		return grille.cases[i].joueur;
+	}
+
+	// cas où non finie (= n)
+	for (i=0; i<9; i++){
+		if (grille.cases[i].joueur == ' '){
+			//partie non finie = n
+			return 'n';
+		}
+	}
+
+	//cas où match nul = d
+	return 'd';
+}
+
+
+
+int debut_min_max(grille_m grille, char joueur){
+	//premier if a enlever à la rigueur car utilisé dans la fonction main pour rentrer dans cette fonction ou alors servira peut être pour le min_max final à voir
+	if (partie_finie(grille)!='n'){
+		//cas où le joueur a gagné
+		if (partie_finie(grille) == joueur){
+			return 1;
+		}
+
+		//match nul
+		if (partie_finie(grille) == 'd'){
+			return 0;
+		}
+
+		//cas où le joueur a perdu
+		return -1;
+	}
+
+        //cas où la partie n'est pas finie
+        //c'est à cet endroit qu'on va modifier lors de la finalisation de la fonction min_max
+        //on renvoie -10 pour le moment
+	return -10;
+
+}
