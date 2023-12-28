@@ -2,10 +2,10 @@
 #include "struct_sarah.h"
 
 int main() {
-    	grille_m pos = {{'x', 'o', 'o', 'o', 'x', 'x', 'x', 'o', 'o'}};
+    	grille_m pos = {{'o', ' ', ' ', 'x', 'o', 'o', 'x', 'x', ' '}};
     	int i = 0;
     	char a = partie_finie(pos);
-    	int b = debut_min_max(pos, 'x');
+    	int b = min_max2(pos, 'x', 'o');
 
     	if (a == 'o' || a == 'x'){
     		printf("La partie est finie. Gagnant : %c\n", a);
