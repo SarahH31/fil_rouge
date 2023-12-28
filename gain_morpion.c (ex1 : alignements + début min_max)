@@ -1,18 +1,16 @@
 include <stdio.h>
 #include "struct_sarah.h"
 
-int i;
-int j;
-int k;
-
 //fonction de détection des alignements pour savoir si partie est finie ou pas
 
 char partie_finie(grille_m grille){
-
+	int i;
+	int j;
+	int k;
         //vérification des colonnes
         for (i=0; i<3; i++){
-		int j = i + 3;
-		int k = i + 6;
+		j = i + 3;
+		k = i + 6;
 		if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != ' ')){
 			return grille.cases[i].joueur;
 		}
@@ -20,10 +18,10 @@ char partie_finie(grille_m grille){
 
         //vérification des lignes
 	for (i=0; i<7; i+=3){
-		int j = i + 1;
-        int k = i + 2;
-        if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != ' ')){
-	        return grille.cases[i].joueur;
+		j = i + 1;
+        	k = i + 2;
+        	if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != ' ')){
+	        	return grille.cases[i].joueur;
 		}
 	}
 
@@ -55,28 +53,65 @@ char partie_finie(grille_m grille){
 	return 'd';
 }
 
+//fonction min_max
+//renvoie 1 si la position donnée est gagnante pour nous si on joue les meilleurs coups
+//renvoie 0 si la position donnée menera à un match nul si les 2 joueurs jouent les meilleurs coups
+//renvoie -1 si la position donnée est perdante pour nous si notre adversaire joue les meilleurs coups
 
+//je rajouterai des commentaires sur cette fonction plus tard
+int min_max2(grille_m grille, char joueur_nous, char joueur_auTrait){
+	int i;
+	int val_defaut;
 
-int debut_min_max(grille_m grille, char joueur){
-	//premier if a enlever à la rigueur car utilisé dans la fonction main pour rentrer dans cette fonction ou alors servira peut être pour le min_max final à voir
+	//cas de base
 	if (partie_finie(grille)!='n'){
 		//cas où le joueur a gagné
-		if (partie_finie(grille) == joueur){
+		if (partie_finie(grille) == joueur_nous){
 			return 1;
 		}
-
 		//match nul
 		if (partie_finie(grille) == 'd'){
 			return 0;
 		}
-
 		//cas où le joueur a perdu
 		return -1;
 	}
 
-        //cas où la partie n'est pas finie
-        //c'est à cet endroit qu'on va modifier lors de la finalisation de la fonction min_max
-        //on renvoie -10 pour le moment
-	return -10;
+	//cas général
+	char val_c[9];
+	if (joueur_nous == joueur_auTrait){
+		val_defaut = -10;
+	}else{
+		val_defaut = 10;
+	}
+	//printf("%d\n", val_defaut);
+
+	for (i=0; i<9; i++){
+		if (grille.cases[i].joueur == ' '){
+			grille.cases[i].joueur = joueur_auTrait;
+			if (joueur_auTrait=='x'){
+				val_c[i] = min_max2(grille, joueur_nous, 'o');
+			}else{
+				val_c[i] = min_max2(grille, joueur_nous, 'x');
+			}
+			grille.cases[i].joueur = ' ';
+		}else{
+			val_c[i] = val_defaut;
+		}
+	}
+
+	int mini_maxi = val_c[0];
+	for (i=1; i<9; i++){
+		if ((joueur_nous == joueur_auTrait) && (val_c[i]>mini_maxi) && (val_c[i]!=10)){
+			mini_maxi = val_c[i];
+		}
+		if ((joueur_nous != joueur_auTrait) && (val_c[i]<mini_maxi) && (val_c[i]!=-10)){
+			mini_maxi = val_c[i];
+		}
+	}
+	
+	//printf("%d\n", mini_maxi);
+
+	return mini_maxi;
 
 }
