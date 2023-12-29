@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include grill.h
+#include "grill.h"
 
 void grid_to_fen(grille_m grid[], int size, char *fen) {
     int count = 0;
@@ -11,7 +11,8 @@ void grid_to_fen(grille_m grid[], int size, char *fen) {
 
             if (cell.joueur == '.') {
                 count++;
-            } else {
+            } 
+            else {
                 if (count > 0) {
                     sprintf(fen, "%d", count);
                     fen += strlen(fen);
