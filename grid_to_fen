@@ -1,14 +1,22 @@
 #include <stdio.h>
 #include <string.h>
 
-void grid_to_fen(char grid[][8], int rows, int cols, char *fen) {
+typedef struct {
+    char joueur; // 'o', 'x', or '.' (vide)
+} Case;
+
+typedef struct {
+    Case cases[9]; 
+} grille_m;
+
+void grid_to_fen(grille_m grid[], int size, char *fen) {
     int count = 0;
 
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            char cell = grid[i][j];
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < 9; j++) {
+            Case cell = grid[i].cases[j];
 
-            if (cell == '.') {
+            if (cell.joueur == '.') {
                 count++;
             } else {
                 if (count > 0) {
@@ -16,7 +24,7 @@ void grid_to_fen(char grid[][8], int rows, int cols, char *fen) {
                     fen += strlen(fen);
                     count = 0;
                 }
-                *fen = cell;
+                *fen = cell.joueur;
                 fen++;
             }
         }
@@ -26,8 +34,8 @@ void grid_to_fen(char grid[][8], int rows, int cols, char *fen) {
             fen += strlen(fen);
             count = 0;
         }
-      
-        if (i < rows - 1) {
+
+        if (i < size - 1) {
             *fen = '/';
             fen++;
         }
@@ -37,12 +45,13 @@ void grid_to_fen(char grid[][8], int rows, int cols, char *fen) {
 }
 
 int main() {
-    char grid[9][9] = {
-        {'x', 'o', '.', '.', 'x', 'x', 'o', 'o', '.'},
+    grille_m grid[] = {
+        {{'x','o','.','.','x','x','o','o','.'}},
+        // Ajoutez ici les autres lignes de la grille
     };
 
     char fen[9 * 9];
-    grid_to_fen(grid, 9, 9, fen);
+    grid_to_fen(grid, 9, fen);
     printf("%s\n", fen);
 
     return 0;
