@@ -1,13 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
-typedef struct {
-    char joueur; // 'o', 'x', or '.' (vide)
-} Case;
-
-typedef struct {
-    Case cases[9]; 
-} grille_m;
+#include grill.h
 
 void grid_to_fen(grille_m grid[], int size, char *fen) {
     int count = 0;
