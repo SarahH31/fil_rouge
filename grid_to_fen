@@ -1,4 +1,4 @@
-#include <stdio.h>
+t #include <stdio.h>
 #include <string.h>
 #include "grill.h"
 
@@ -41,7 +41,7 @@ void grid_to_fen(grille_m grid[], int size, char *fen) {
 int main() {
     grille_m grid[] = {
         {{'x','o','.','.','x','x','o','o','.'}},
-        // Ajoutez ici les autres lignes de la grille
+        //est ce qu'il y a d'autres lignes ?
     };
 
     char fen[9 * 9];
