@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "grille.h"
 
 #define MAX_LEN 9
 
