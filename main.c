@@ -1,8 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include "arbre.h"
+#include "dico.h"
+#include "grille.h"
+#include "fact.h"
+
+
+#include "dico.c"
+#include "arbre.c"
 #include "grille.c"
-
-
+#include "fact.c"
 
 int main(int argc, char *argv[]) {
 
@@ -41,21 +50,28 @@ int main(int argc, char *argv[]) {
     strncpy(etat_grille, fen, space_position);
     etat_grille[space_position] = '\0';
 
-    const char *joueur_trait = fen + space_position + 1;
+    char joueur_trait[2];
+    joueur_trait[0] = fen[space_position + 1];
+    joueur_trait[1] = '\0';
 
 	char fen_complete[space_position + size - space_position];
     strcpy(fen_complete, etat_grille);
     strcat(fen_complete, joueur_trait);
 	
+
 	grille_m morpion = fen_to_grid(fen_complete);
 	
-	// estJouable("9 01");
-
-
-	actualise_dot(&morpion, "graphviz_output.dot");
+	initialiser_etats(&morpion);
+	
+	actualise_dot_arbre(&morpion, "arbre.dot", joueur_trait[0]);
+	//actualise_dot(&morpion, "graphviz_output.dot");
 
    	// commande convertit le fichier DOT en PNG
-	system("dot -Tpng graphviz_output.dot -o graphviz_output.png");
+   	system("dot -Tpng arbre.dot -o arbre.png");
+	//system("dot -Tpng graphviz_output.dot -o graphviz_output.png");
+	
+	
+	void liberer_etats();
 
 	return 0;
 

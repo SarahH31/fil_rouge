@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "grille.h"
+#include "dico.h"
 
 
 grille_m new_grille_m() {
@@ -16,9 +18,14 @@ grille_m new_grille_m() {
 
 
 position new_position() {
-	position *pos;
+    position *pos = (position*)malloc(sizeof(position));
+    if (pos == NULL) {
+        perror("Erreur lors de l'allocation de la position");
+        exit(EXIT_FAILURE);
+    }
+
     for (int j = 0; j < 9; j++) {
-    	new_grille_m(&(pos->grilles[j]));
+        pos->grilles[j] = new_grille_m();
     }
 
     pos->joueurActuel = 'o';
@@ -26,7 +33,8 @@ position new_position() {
 }
 
 
-int estJouable(const char* fen){
+
+int estJouable_sm(const char* fen){
 	int size = strlen(fen);
 	for (int i = 0; i < size; i++) {
 		// TODO: vérifier le format de la fen avec laquelle on travaille
@@ -51,7 +59,7 @@ int estJouable(const char* fen){
      		return 1;
        }
         
-    fprintf(stderr, "Message d'erreur :format incorrect\n");
+    fprintf(stderr, "Message d'erreur : format incorrect\n");
     return 1;
     } 
 }
