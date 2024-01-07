@@ -29,10 +29,7 @@ void grid_to_fen(grille_m grid[], int size, char *fen) {
             count = 0;
         }
 
-        if (i < size - 1) {
-            *fen = '/';
-            fen++;
-        }
+
     }
 
     *fen = '\0';
@@ -41,7 +38,6 @@ void grid_to_fen(grille_m grid[], int size, char *fen) {
 int main() {
     grille_m grid[] = {
         {{'x','o','.','.','x','x','o','o','.'}},
-        //est ce qu'il y a d'autres lignes ?
     };
 
     char fen[9 * 9];
