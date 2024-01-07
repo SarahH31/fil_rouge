@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <string.h>
+#include "grille.h"
+
+
+typedef struct {
+  Case cases[9][9];
+} grille_sm;
+
+
+void play_super_morpion(grille_sm morpion) {
+
+    // Récupérer les numéros de grille, de colonne et de ligne
+    int num_grille, num_col, num_ligne;
+    char coup;
+    char input[100];
+    printf("Entrez votre coup sous la forme \"<#grille>(1..9) espace <#colonne>(a..c) <#ligne>(1..3) <#coup>(x,o)\" : ");
+    fgets(input, sizeof(input), stdin);
+    sscanf(input, "%d %d%d %c", &num_grille, &num_col, &num_ligne, &coup);
+
+    num_grille = num_grille-1;
+  
+    int num_case;
+    if (num_col=='a' && num_ligne==3) {
+      num_case = 0;
+    }
+    else if (num_col=='b' && num_ligne==3) {
+      num_case = 1;
+    }
+    else if (num_col=='c' && num_ligne==3) {
+      num_case = 2;
+    }
+    else if (num_col=='a' && num_ligne==2) {
+      num_case = 3;
+    }
+    else if (num_col=='b' && num_ligne==2) {
+      num_case = 4;
+    }
+    else if (num_col=='c' && num_ligne==2) {
+      num_case = 5;
+    }
+    else if (num_col=='a' && num_ligne==1) {
+      num_case = 6;
+    }
+    else if (num_col=='b' && num_ligne==1) {
+      num_case = 7;
+    }
+    else if (num_col=='c' && num_ligne==1) {
+      num_case = 8;
+    }
+
+    // Vérifier si le coup est valide
+    if (morpion.cases[num_grille][num_case].joueur == 'x' || morpion.cases[num_grille][num_case].joueur == 'o') {
+      printf("Coup invalide. Cette case est déjà occupée.\n");
+      return;
+    }
+
+    // Mettre à jour la grille
+    else {morpion.cases[num_grille][num_case].joueur = coup;}
+
+}
+
+int main() {
+  // Exemple de grille pour jouer au super morpion
+  grille_sm ex_grille = {
+      {
+          {'x', '.', 'o', 'o', '.', '.', 'x', '.', '.'},
+          {'.', 'x', '.', 'o', 'o', 'x', '.', '.', '.'},
+          {'.', '.', 'x', 'x', 'o', 'o', '.', '.', '.'},
+          {'o', '.', 'x', '.', 'o', 'x', '.', '.', '.'},
+          {'.', 'o', '.', '.', 'x', 'x', 'o', '.', '.'},
+          {'o', 'o', 'x', 'x', '.', '.', '.', '.', '.'},
+          {'.', '.', '.', '.', 'o', 'x', '.', 'x', 'o'},
+          {'.', '.', 'x', '.', 'x', 'o', '.', '.', 'o'},
+          {'x', '.', 'o', '.', '.', 'x', '.', 'o', '.'}
+      }
+  };
+
+  play_super_morpion(ex_grille);
+
+  for (int i = 0; i < 9; i++) {
+      for (int j = 0; j < 9; j++) {
+          printf("%c ", ex_grille.cases[i][j].joueur);
+      }
+      printf("\n");
+  }
+
+    return 0;
+}
