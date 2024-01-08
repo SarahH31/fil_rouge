@@ -1,11 +1,9 @@
-int main() {
-    char super_morpion[9][9];  #??
-    char nouvelle_liste[9];  #new_grille_m()??
-
-    // ... code pour remplir super_morpion ...
+char détection_super_morpion(position sm) {
+   
+    char nouvelle_liste[9]={'.','.','.','.','.','.','.','.','.'}   #new_grille_m()??
 
     for (int i = 0; i < 9; i++) {
-        char gagnant = partie_finie(super_morpion[i]);  #changer le nom de l'argument
+        char gagnant = partie_finie(sm.grilles[i]);  #changer le nom de l'argument
         if (gagnant == 'x') {
             nouvelle_liste[i] = 'X';
         } else if (gagnant == 'o') {
