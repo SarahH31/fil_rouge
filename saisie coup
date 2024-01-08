@@ -2,21 +2,19 @@
 #include <string.h>
 #include "grille.h"
 
-
 typedef struct {
   Case cases[9][9];
 } grille_sm;
 
-
 void play_super_morpion(grille_sm morpion) {
 
     // Récupérer les numéros de grille, de colonne et de ligne
-    int num_grille, num_col, num_ligne;
-    char coup;
+    int num_grille, num_ligne;
+    char coup, num_col;
     char input[100];
     printf("Entrez votre coup sous la forme \"<#grille>(1..9) espace <#colonne>(a..c) <#ligne>(1..3) <#coup>(x,o)\" : ");
     fgets(input, sizeof(input), stdin);
-    sscanf(input, "%d %d%d %c", &num_grille, &num_col, &num_ligne, &coup);
+    sscanf(input, "%d %c%d %c", &num_grille, &num_col, &num_ligne, &coup);
 
     num_grille = num_grille-1;
   
@@ -55,8 +53,16 @@ void play_super_morpion(grille_sm morpion) {
       return;
     }
 
-    // Mettre à jour la grille
+    // Mettre à jour la chaîne fen
     else {morpion.cases[num_grille][num_case].joueur = coup;}
+
+    /*Afficher la grille
+    for (int i = 0; i < 9; i++) {
+      for (int j = 0; j < 9; j++) {
+        printf("%c ", morpion.cases[i][j].joueur);
+      }
+      printf("\n");*/
+  }
 
 }
 
@@ -78,12 +84,5 @@ int main() {
 
   play_super_morpion(ex_grille);
 
-  for (int i = 0; i < 9; i++) {
-      for (int j = 0; j < 9; j++) {
-          printf("%c ", ex_grille.cases[i][j].joueur);
-      }
-      printf("\n");
-  }
-
-    return 0;
+  return 0;
 }
