@@ -11,7 +11,7 @@ char partie_finie(grille_m grille){
         for (i=0; i<3; i++){
 		j = i + 3;
 		k = i + 6;
-		if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != ' ')){
+		if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != '.')){
 			return grille.cases[i].joueur;
 		}
 	}
@@ -20,7 +20,7 @@ char partie_finie(grille_m grille){
 	for (i=0; i<7; i+=3){
 		j = i + 1;
         	k = i + 2;
-        	if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != ' ')){
+        	if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != '.')){
 	        	return grille.cases[i].joueur;
 		}
 	}
@@ -29,7 +29,7 @@ char partie_finie(grille_m grille){
 	i = 2;
 	j = 4;
 	k = 6;
-	if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != ' ')){
+	if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != '.')){
 		return grille.cases[i].joueur;
 	}
 
@@ -37,13 +37,13 @@ char partie_finie(grille_m grille){
 	i = 0;
 	j = 4;
 	k = 8;
-	if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != ' ')){
+	if ((grille.cases[i].joueur == grille.cases[j].joueur) && (grille.cases[i].joueur == grille.cases[k].joueur) && (grille.cases[i].joueur != '.')){
 		return grille.cases[i].joueur;
 	}
 
 	// cas où non finie (= n)
 	for (i=0; i<9; i++){
-		if (grille.cases[i].joueur == ' '){
+		if (grille.cases[i].joueur == '.'){
 			//partie non finie = n
 			return 'n';
 		}
@@ -87,14 +87,14 @@ int min_max2(grille_m grille, char joueur_nous, char joueur_auTrait){
 	//printf("%d\n", val_defaut);
 
 	for (i=0; i<9; i++){
-		if (grille.cases[i].joueur == ' '){
+		if (grille.cases[i].joueur == '.'){
 			grille.cases[i].joueur = joueur_auTrait;
 			if (joueur_auTrait=='x'){
 				val_c[i] = min_max2(grille, joueur_nous, 'o');
 			}else{
 				val_c[i] = min_max2(grille, joueur_nous, 'x');
 			}
-			grille.cases[i].joueur = ' ';
+			grille.cases[i].joueur = '.';
 		}else{
 			val_c[i] = val_defaut;
 		}
