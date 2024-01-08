@@ -2,7 +2,7 @@
 #include "struct_sarah.h"
 
 int main() {
-    	grille_m pos = {{'o', ' ', ' ', 'x', 'o', 'o', 'x', 'x', ' '}};
+    	grille_m pos = {{'o', '.', '.', 'x', 'o', 'o', 'x', 'x', '.'}};
     	int i = 0;
     	char a = partie_finie(pos);
     	int b = min_max2(pos, 'x', 'o');
