@@ -1,12 +1,21 @@
 #include <stdio.h>
 #include <string.h>
-#include "grille.h"
 
 typedef struct {
-  Case cases[9][9];
-} grille_sm;
+  char joueur; // 'o', 'x', ou '.' (vide)
+} Case;
 
-void play_super_morpion(grille_sm morpion) {
+typedef struct {
+    Case cases[9]; 
+} grille_m;
+
+typedef struct {
+    grille_m grilles[9]; 
+    char joueurActuel;
+} position;
+
+
+position play_super_morpion(position morpion) {
 
     // Récupérer les numéros de grille, de colonne et de ligne
     int num_grille, num_ligne;
@@ -48,27 +57,20 @@ void play_super_morpion(grille_sm morpion) {
     }
 
     // Vérifier si le coup est valide
-    if (morpion.cases[num_grille][num_case].joueur == 'x' || morpion.cases[num_grille][num_case].joueur == 'o') {
+    if (morpion.grilles[num_grille].cases[num_case].joueur == 'x' || morpion.grilles[num_grille].cases[num_case].joueur == 'o') {
       printf("Coup invalide. Cette case est déjà occupée.\n");
       return;
     }
 
     // Mettre à jour la chaîne fen
-    else {morpion.cases[num_grille][num_case].joueur = coup;}
+    else {morpion.grilles[num_grille].cases[num_case].joueur = coup;}
 
-    /*Afficher la grille
-    for (int i = 0; i < 9; i++) {
-      for (int j = 0; j < 9; j++) {
-        printf("%c ", morpion.cases[i][j].joueur);
-      }
-      printf("\n");*/
-  }
-
+  return morpion;
 }
 
 int main() {
   // Exemple de grille pour jouer au super morpion
-  grille_sm ex_grille = {
+  position ex_grille = {
       {
           {'x', '.', 'o', 'o', '.', '.', 'x', '.', '.'},
           {'.', 'x', '.', 'o', 'o', 'x', '.', '.', '.'},
@@ -82,7 +84,14 @@ int main() {
       }
   };
 
-  play_super_morpion(ex_grille);
-
+  ex_grille = play_super_morpion(ex_grille);
+  
+  //Afficher la grille
+  for (int i = 0; i < 9; i++) {
+    for (int j = 0; j < 9; j++) {
+      printf("%c ", ex_grille.grilles[i].cases[j].joueur);
+    }
+    printf("\n");}
+  
   return 0;
 }
