@@ -1,0 +1,119 @@
+#include <stdio.h>
+#include "struct_sarah.h"
+
+void affSuperM_standard(position pos_etTrait){
+  position pos = pos_etTrait;
+	int i;
+	int j;
+	int i1;
+	int i2;
+
+	for (i=0; i<7; i+=3){
+		i1 = i+1;
+		i2 = i+2;
+
+                //1ere ligne, 4eme ligne, 7eme ligne
+		for (j=0; j<3; j++){
+			printf("%c", ' ');
+			printf("%c", pos.grilles[i].cases[j].joueur);
+		}
+
+                //séparation des morpions sur la longueur
+		printf("%c", ' ');
+		printf("%c", ' ');
+		printf("%c", ' ');
+
+		for (j=0; j<3; j++){
+			printf("%c", ' ');
+			printf("%c", pos.grilles[i1].cases[j].joueur);
+		}
+
+                //séparation des morpions sur la longueur
+		printf("%c", ' ');
+		printf("%c", ' ');
+		printf("%c", ' ');
+
+		for (j=0; j<3; j++){
+			printf("%c", ' ');
+			printf("%c", pos.grilles[i2].cases[j].joueur);
+		}
+
+		printf("\n");
+
+                //2eme ligne, 5eme ligne, 8eme ligne
+		for (j=3; j<6; j++){
+			printf("%c", ' ');
+			printf("%c", pos.grilles[i].cases[j].joueur);
+		}
+
+                //séparation des morpions sur la longueur
+		printf("%c", ' ');
+		printf("%c", ' ');
+		printf("%c", ' ');
+
+		for (j=3; j<6; j++){
+			printf("%c", ' ');
+			printf("%c", pos.grilles[i1].cases[j].joueur);
+		}
+
+                //séparation des morpions sur la longueur
+		printf("%c", ' ');
+		printf("%c", ' ');
+		printf("%c", ' ');
+
+		for (j=3; j<6; j++){
+			printf("%c", ' ');
+			printf("%c", pos.grilles[i2].cases[j].joueur);
+		}
+
+		printf("\n");
+
+                //3eme ligne, 6eme ligne, 9eme ligne
+		for (j=6; j<9; j++){
+			printf("%c", ' ');
+			printf("%c", pos.grilles[i].cases[j].joueur);
+		}
+
+                //séparation des morpions sur la longueur
+		printf("%c", ' ');
+		printf("%c", ' ');
+		printf("%c", ' ');
+
+		for (j=6; j<9; j++){
+			printf("%c", ' ');
+			printf("%c", pos.grilles[i1].cases[j].joueur);
+		}
+
+                //séparation des morpions sur la longueur
+		printf("%c", ' ');
+		printf("%c", ' ');
+		printf("%c", ' ');
+
+		for (j=6; j<9; j++){
+			printf("%c", ' ');
+			printf("%c", pos.grilles[i2].cases[j].joueur);
+		}
+
+                //séparation des morpions en hauteur
+		printf("\n");
+		printf("\n");
+		printf("\n");
+	}
+
+}
+
+//exemple affichage pour vérifier que ça marche bien
+int main(){
+	int l;
+	int m;
+	position posit;
+
+	for (l=0; l<9; l++){
+		for (m=0; m<9; m++){
+			posit.grilles[l].cases[m].joueur = '.';
+		}
+	}
+	posit.joueurActuel = 'o';
+	affSuperM_standard(posit);	
+}
+
