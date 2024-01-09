@@ -4,7 +4,7 @@ int détection_coup_jouable (indice, position sm){
 
 if partie finie sm.grilles[indice]='n'{
 	
-  ###appliquer minmax à la grille indice
+  ###appliquer minmax à sm.grilles[indice]
 }
 
 if partie finie sm.grilles[indice]!='n'{
