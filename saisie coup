@@ -2,7 +2,7 @@
 #include <string.h>
 #include "grille.h"
 
-position play_super_morpion(position morpion) {
+position saisieCoup(position morpion) {
 
     // Récupérer les numéros de grille, de colonne et de ligne
     int num_grille, num_ligne;
@@ -71,7 +71,7 @@ int main() {
       }
   };
 
-  ex_grille = play_super_morpion(ex_grille);
+  ex_grille = saisieCoup(ex_grille);
   
   //Afficher la grille
   for (int i = 0; i < 9; i++) {
