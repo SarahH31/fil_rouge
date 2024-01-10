@@ -2,16 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
 #include "arbre.h"
 #include "dico.h"
 #include "grille.h"
-#include "fact.h"
 
 
-#include "dico.c"
 #include "arbre.c"
+#include "dico.c"
 #include "grille.c"
-#include "fact.c"
+
+
 
 int main(int argc, char *argv[]) {
 
@@ -25,6 +26,7 @@ int main(int argc, char *argv[]) {
 
     int size = strlen(fen);
     int space_position = -1;
+
 
     for (int i = 0; i < size; i++) {
         if (fen[i] == ' ') {
@@ -60,19 +62,10 @@ int main(int argc, char *argv[]) {
 	
 
 	grille_m morpion = fen_to_grid(fen_complete);
+	actualise_dot_arbre(&morpion, "g1.dot", joueur_trait[0]);
 	
-	initialiser_etats(&morpion);
-	
-	actualise_dot_arbre(&morpion, "arbre.dot", joueur_trait[0]);
-	//actualise_dot(&morpion, "graphviz_output.dot");
-
-   	// commande convertit le fichier DOT en PNG
-   	system("dot -Tpng arbre.dot -o arbre.png");
-	//system("dot -Tpng graphviz_output.dot -o graphviz_output.png");
-	
-	
-	void liberer_etats();
+	system("dot -Tpng g1.dot -o g1.png");
 
 	return 0;
-
+	
 }

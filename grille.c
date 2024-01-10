@@ -52,7 +52,7 @@ int estJouable_sm(const char* fen){
     				}
     				printf("Le coup n'est pas jouable");
     				return 1;
-    				// TODO: dans la fonction, permettre au joueur de rentrer un autre coup
+
     		}
    			fprintf(stderr, "Message d'erreur : le coup demandé n'est pas au bon format\n");
    			// TODO: dans la fonction, permettre au joueur de rentrer un autre coup

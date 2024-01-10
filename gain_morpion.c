@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "grille.h"
 
+
+
 //fonction de détection des alignements pour savoir si partie est finie ou pas
 
 char partie_finie(grille_m grille){
