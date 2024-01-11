@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- **** H E A D **** -->
+<head>	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>AAP-refresh</title>
+
+<style>
+.float {
+	position:absolute;
+}
+#cadre {
+text-align:center;
+}
+
+#img {
+max-width:90%; 
+}
+</style>
+
+
+<script>
+
+// version 9/12/2023  
+
+function init() {
+	refP=document.getElementById("path"); 
+	refF=document.getElementById("freq"); 	
+	majPath(); 
+	refresh(); 
+	window.setTimeout(refresh, freq); 
+}
+
+function majPath() {
+	path = refP.value; 
+	freq = refF.value; 
+	if (freq=="")  freq=10; 
+	freq *= 1000; 
+}
+
+function refresh() {
+	majPath();
+	document.getElementById("img").src=path + "?p=" + Math.random();
+	window.setTimeout(refresh, freq); 
+}
+
+</script>
+
+</head>
+
+<body onload="init(); ">
+
+<div class="float">
+	<h1 >AAP-refresh</h1>
+	<p>Chemin image : <input type="text" id="path" value="morpion.png"/> </p>
+	Fréquence maj (s) : <input type="text" id="freq" value="10"/>
+</div>
+
+<div id="cadre">
+	<img id="img" src="" />
+</div>
+
+
+</body>
+
