@@ -32,8 +32,14 @@ void generer_sm(FILE *file, position *sm, char joueur_trait) {
     for (int num_m = 0; num_m < 9; num_m++) {
         char *bgcolor = (partie_finie(sm->grilles[num_m]) == 'o') ? "black" : (partie_finie(sm->grilles[num_m]) == 'x') ? "white" : "black";
         fprintf(file, "<TD bgcolor=\"%s\">\n", bgcolor);
-        fprintf(file, "<TABLE border=\"0\" cellspacing=\"10\" cellpadding=\"10\" style=\"rounded\" bgcolor=\"%s\">\n", bgcolor);
+        
+        if (partie_finie(sm->grilles[num_m]) != 'n'){
+        	char *bgcolor = (partie_finie(sm->grilles[num_m]) == 'o') ? "white" : (partie_finie(sm->grilles[num_m]) == 'x') ? "black" : "white";
+        	fprintf(file, "<TABLE border=\"0\" cellspacing=\"10\" cellpadding=\"10\" style=\"rounded\" bgcolor=\"%s\">\n", bgcolor);
 
+        }
+        else{fprintf(file, "<TABLE border=\"0\" cellspacing=\"10\" cellpadding=\"10\" style=\"rounded\" bgcolor=\"%s\">\n", bgcolor);}
+		
         bgcolor = (partie_finie(sm->grilles[num_m]) == 'o') ? "white" : (partie_finie(sm->grilles[num_m]) == 'x') ? "black" : "white";
 
         for (int k = 0; k < 3; k++) {
