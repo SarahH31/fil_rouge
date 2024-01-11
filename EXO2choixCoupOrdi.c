@@ -9,13 +9,13 @@
 int conversion_numcase(char num_col, int num_ligne){
 
 	int num_case;
-	if (num_col=='a' && num_ligne==1) {
+	if (num_col=='a' && num_ligne==3) {
 		num_case = 0;
 	}
-	else if (num_col=='b' && num_ligne==1) {
+	else if (num_col=='b' && num_ligne==3) {
 		num_case = 1;
 	}
-	else if (num_col=='c' && num_ligne==1) {
+	else if (num_col=='c' && num_ligne==3) {
 		num_case = 2;
 	}
 	else if (num_col=='a' && num_ligne==2) {
@@ -27,13 +27,13 @@ int conversion_numcase(char num_col, int num_ligne){
 	else if (num_col=='c' && num_ligne==2) {
 		num_case = 5;
 	}
-	else if (num_col=='a' && num_ligne==3) {
+	else if (num_col=='a' && num_ligne==1) {
 		num_case = 6;
 	}
-	else if (num_col=='b' && num_ligne==3) {
+	else if (num_col=='b' && num_ligne==1) {
 		num_case = 7;
 	}
-	else if (num_col=='c' && num_ligne==3) {
+	else if (num_col=='c' && num_ligne==1) {
 		num_case = 8;
 	}
 	
