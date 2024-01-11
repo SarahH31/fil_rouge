@@ -14,10 +14,8 @@ int main(int argc, char *argv[]) {
         	printf("Usage: %s <horizon>\n", argv[0]);
 		return 1;  // Quitter avec un code d'erreur
 	}
-
 	// Récupérer l'horizon à partir du premier argument
 	int horizon = atoi(argv[1]);
-
 	printf("L'horizon de recherche est fixé à : %d\n", horizon);
 	
 	//Initialisation du morpion initial
@@ -38,8 +36,7 @@ int main(int argc, char *argv[]) {
 	
 	// Reste du code
 	while(detection_super_morpion(pos_superM)=='n'){//grand morpion non fini{}
-		//on demande un coup à l'utilisateur
-		// Récupérer les numéros de grille, de colonne et de ligne
+		//On demande un coup à l'utilisateur et on récupérer les numéros de grille, de colonne et de ligne
 		int num_grille, num_ligne;
 		char coup, num_col;
 		char input[100];
